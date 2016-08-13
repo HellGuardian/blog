@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/static/img/favicon.png">
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <title>后台管理 - 我的Go博客</title>
+</head>
+<body>
+<div class="navbar navbar-default">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/admin/login">后台管理</a>
+            <ul class="nav navbar-nav">
+                <li {{if .IsHome}}class="active"{{end}}><a href="/admin">Dashboard</a></li>
+                <li {{if .IsCategory}}class="active"{{end}}><a href="/admin/user/details">Profile</a></li>
+                <li {{if .IsTopic}}class="active"{{end}}><a href="/admin/setting">Setting</a></li>
+                <li {{if .IsUser}}class="active"{{end}}><a href="/admin/help">Help</a></li>
+            </ul>
+        </div>
+
+        <div class="pull-right">
+            <ul class="nav navbar-nav">
+                {{if .IsLogin}}
+                <li>您好,欢迎 <a href="/admin/user/details">{{.user.UserName}}</a> 回来,<a href="/admin/login?exit=true">退出登录</a></li>
+                {{else}}
+                <li><a href="/admin/login">管理员登录</a></li>
+                {{end}}
+                <li><a href="/">博客首页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="section3">
+    <div class="container">
+        <div class="row text-left">
+            <div class="col-lg-2 bs-docs-sidebar sidebar">
+                <ul class="nav nav-pills nav-stacked">
+                <li><a href="/admin/user/list">用户列表</a></li>
+                <li><a href="/admin/user/add">添加用户</a></li>
+                <li><a href="/admin/article/list">文章列表</a></li>
+                <li><a href="/admin/article/add">添加文章</a></li>
+                <li><a href="/admin/category/list">分类列表</a></li>
+                <li><a href="/admin/category/add">添加分类</a></li>
+                <li><a href="/admin/test">test</a></li>
+                </ul>
+            </div>
+            <div>
+                {{.LayoutContent}}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>
