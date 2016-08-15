@@ -57,11 +57,19 @@ func (this *baseController) GetUserInfo(username string) (*models.User, error) {
 	if err != nil {
 		return nil, err
 	}
-	//err = qs.Filter("password", password).One(user)
-	//if err != nil {
-	//	return nil, err
-	//}
 	return user, err
 }
 
+// 获取分类名称
+/*func (this *baseController) GetCategoryInfo(title string) error {
+	o := orm.NewOrm()
+	category := new(models.Category)
 
+	qs := o.QueryTable("category")
+	err := qs.Filter("title", title).One(category)
+	if category.Title == title {
+		this.ShowMsg("分类名称已经存在,请重新输入。")
+		return err
+	}
+	return err
+} */

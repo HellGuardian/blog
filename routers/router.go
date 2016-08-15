@@ -20,12 +20,15 @@ func init() {
 	beego.Router("/admin/article/list", &admin.ArticleController{}, "*:List")
 	beego.Router("/admin/article/add", &admin.ArticleController{}, "*:Add")
 	beego.Router("/admin/article/edit", &admin.ArticleController{}, "*:Edit")
+	beego.Router("/admin/article/delete", &admin.ArticleController{}, "*:Delete")
 
 	beego.Router("/admin/category/list", &admin.CategoryController{}, "*:List")
 	beego.Router("/admin/category/add", &admin.CategoryController{}, "*:Add")
 	beego.Router("/admin/category/edit", &admin.CategoryController{}, "*:Edit")
+	beego.Router("/admin/category/delete", &admin.CategoryController{}, "*:Delete")
 
 
+	//beego.Router("/admin/test", &admin.MainController{})
 	beego.Router("/admin/test", &admin.TestController{})
 
 	// 前台管理

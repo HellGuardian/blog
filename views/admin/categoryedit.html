@@ -1,1 +1,24 @@
-编辑分类页面
+<fieldset>
+    <legend>修改分类</legend>
+    <form class="form-horizontal" method="post">
+        <input type="hidden" name="id" value="{{.cate.Id}}">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">分类名称:</label>
+            <div class="col-sm-5">
+                <input type="text" name="cName" id="cName" value="{{.cate.Title}}" class="form-control input-sm" placeholder="分类名称" />
+            </div>
+        </div>
+
+        <!-- 提交or保存 -->
+        <div class="form-group">
+            <div class="col-sm-2">
+                <input type="hidden">
+            </div>
+            <div class="col-sm-3">
+                <button type="submit" class="btn btn-success" onclick="return checkInput();">保 存</button>&nbsp;&nbsp;
+                <a class="btn btn-default" type=button onclick="javascript:window.history.back();">返 回</a>
+            </div>
+        </div>
+
+    </form>
+</fieldset>

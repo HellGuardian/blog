@@ -1,1 +1,59 @@
-编辑文章页面
+<fieldset>
+    <legend>添加文章</legend>
+    <form class="form-horizontal" method="post">
+
+        <div class="form-group">
+            <label>标题</label>
+            <input type="text" name="title" id="title" class="form-control input-sm" placeholder="文章标题" />
+            <span class="text-error">{{.errmsg.title}}</span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-static">分类</label>
+            <div>
+                <select class="form-control">
+                    {{range $k, $v := .list}}
+                    <option>{{$v.Title}}</option>
+                    {{end}}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>内容</label>
+            <textarea name="comment" id="comment" class="form-control" cols="30" rows="7"></textarea>
+            <span class="text-error">{{.errmsg.comment}}</span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">标签:</label>
+            <input name="tag" id="tag" class="form-control input-sm" />
+            <span class="text-error">{{.errmsg.password1}}</span>
+        </div>
+
+        <!-- 状态 -->
+        <div class="form-group">
+            <label>状态:</label>
+            <div>
+                <input type="radio" name="active" value="1" id="data_active_1" checked />
+                <label for="data_active_1" class="help-inline">所有人可见</label>&nbsp;&nbsp;
+                <input type="radio" name="active" value="2" id="data_active_2" />
+                <label for="data_active_2" class="help-inline">仅主人可见</label>&nbsp;&nbsp;
+                <input type="radio" name="active" value="3" id="data_active_3" />
+                <label for="data_active_3" class="help-inline">置顶</label>
+            </div>
+        </div>
+
+        <!-- 提交or保存 -->
+        <div class="form-group">
+            <div class="col-sm-2">
+                <input type="hidden">
+            </div>
+            <div class="col-sm-3">
+                <button type="submit" class="btn btn-success" onclick="return checkInput();">保 存</button>&nbsp;&nbsp;
+                <a class="btn btn-default" type=button onclick="javascript:window.history.back();">返 回</a>
+            </div>
+        </div>
+
+    </form>
+</fieldset>

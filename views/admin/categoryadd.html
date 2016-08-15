@@ -1,1 +1,25 @@
-添加分类页面
+<fieldset>
+    <legend>添加分类</legend>
+    <form class="form-horizontal" method="post">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">分类名称:</label>
+            <div class="col-sm-5">
+                <input type="text" name="cName" id="cName" class="form-control input-sm" placeholder="分类名称" />
+                <!-- <span class="text-error">{{.errmsg.username}}</span> -->
+            </div>
+        </div>
+
+        <!-- 提交or保存 -->
+        <div class="form-group">
+            <div class="col-sm-2">
+                <input type="hidden">
+            </div>
+            <div class="col-sm-3">
+                <button type="submit" class="btn btn-success" onclick="return checkInput();">提 交</button>&nbsp;&nbsp;
+                <a class="btn btn-default" type=button onclick="javascript:window.history.back();">返 回</a>
+            </div>
+        </div>
+
+    </form>
+</fieldset>

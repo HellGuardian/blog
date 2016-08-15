@@ -8,6 +8,10 @@ type TestController struct  {
 	baseController
 }
 
+type MainController struct  {
+	beego.Controller
+}
+
 func (this *TestController) Get() {
 	this.Layout = "admin/layout.html"
 	this.TplName = "admin/test.html"
@@ -17,5 +21,9 @@ func (this *TestController) Get() {
 		beego.Error(err)
 		return
 	}
+	//sessionID := this.GetSession("auth")
+	s := this.Ctx.GetCookie("auth")
+
+	this.Data["auth"] = s
 	this.Data["user"] = user
 }

@@ -56,15 +56,3 @@ func (u *User) Delete() error {
 func (u *User) Query() orm.QuerySeter {
 	return orm.NewOrm().QueryTable(u)
 }
-
-/*func GetOneUserInfo(id int) (*User, error) {
-	o := orm.NewOrm()
-	user := new(User)
-
-	qs := o.QueryTable("user")
-	err := qs.Filter("id", 1).One(&user)
-	if err != nil {
-		return nil, err
-	}
-	return user, err
-} */

@@ -9,11 +9,17 @@
     <script style="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
     <title>登录 - 我的Go博客</title>
     <style>
-        .form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
-}
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+        }
+    .vertical-center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 <body>
@@ -55,7 +61,7 @@
     </form>
 </div>
 
-<div class="container col-sm-3" align="center">
+<div class="container col-sm-3 vertical-center">
     {{if .ErrMsg}}
     <div class="panel panel-danger">
         <div class="panel-heading">
