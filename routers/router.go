@@ -32,5 +32,7 @@ func init() {
 	beego.Router("/admin/test", &admin.TestController{})
 
 	// 前台管理
-	beego.Router("/", &front.IndexController{})
+	beego.Router("/", &front.IndexController{}, "*:Index")
+
+	beego.Router("/front/viewsarticle", &front.IndexController{}, "*:View")
 }

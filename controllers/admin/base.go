@@ -60,6 +60,18 @@ func (this *baseController) GetUserInfo(username string) (*models.User, error) {
 	return user, err
 }
 
+// 根据分隔符 | 来分隔字符串
+func split(s rune) bool {
+	if s == '|' {
+		return true
+	}
+	return false
+}
+func Separate(s string) string {
+	sm := strings.FieldsFunc(s, split)
+	return sm[0]
+}
+
 // 获取分类名称
 /*func (this *baseController) GetCategoryInfo(title string) error {
 	o := orm.NewOrm()

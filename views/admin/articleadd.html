@@ -25,7 +25,16 @@
 
         <div class="form-group">
             <label class="control-label">标签:</label>
-            <input name="tag" id="tag" class="form-control input-sm" />
+            <p>
+                <input name="tag" id="tag" class="form-control input-sm" />
+            </p>
+            <label>标签选择:</label>
+            <input type="checkbox" value="linux" name="linux" id="linux" onclick="checkTag(this, 'linux', 'linux')">&nbsp;linux
+            <input type="checkbox" value="java" name="java" id="java" onclick="checkTag(this, 'java', 'java')">&nbsp;java
+            <input type="checkbox" value="php" name="php" id="php" onclick="checkTag(this, 'php', 'php')">&nbsp;php
+            <input type="checkbox" value="git" name="git" id="git" onclick="checkTag(this, 'git', 'git')">&nbsp;git
+            <input type="checkbox" value="golang" name="golang" id="golang" onclick="checkTag(this, 'golang', 'golang')">&nbsp;golang
+            <input type="checkbox" value="nginx" name="nginx" id="nginx" onclick="checkTag(this, 'nginx', 'nginx')">&nbsp;nginx
         </div>
 
         <!-- 状态 -->
@@ -67,4 +76,19 @@
             alert("内容不能为空,请输入内容。")
         }
     }
+
+    function checkTag(e, itemName, thisValue){
+  var target = document.getElementById('tag');
+  var targetValue = target.value;
+  var inputs = document.getElementsByName(itemName);
+  if (e.checked == true) {
+    targetValue += thisValue + ';';
+  } else {
+    targetValue = targetValue.replace(thisValue + ';', '');
+  }
+  target.value = targetValue;
+  for(var i=0; i<inputs.length; i++){
+    inputs[i].checked = e.checked;
+  }
+}
 </script>

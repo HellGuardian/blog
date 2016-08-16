@@ -1,1 +1,9 @@
-{{.version}}
+{{range $k, $v := .list}}
+<div class="page-header">
+    <h2><a href="/front/viewsarticle?id={{$v.Id}}">{{$v.Title}}</a></h2>
+    <h6 class="text-muted">文章发表于 {{date $v.CreateTime "Y-m-d H:i:s"}}, 共有 {{$v.ViewCount}} 次浏览, {{$v.ReplyCount}} 个评论</h6>
+    <p>
+        {{$v.Content}}
+    </p>
+</div>
+{{end}}

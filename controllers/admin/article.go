@@ -4,6 +4,7 @@ import (
 	"blog/models"
 	"strings"
 	"time"
+	"strconv"
 )
 
 type ArticleController struct  {
@@ -23,6 +24,7 @@ func (this *ArticleController) List() {
 	}
 	this.Data["list"] = list
 }
+
 
 // 添加文章
 func (this *ArticleController) Add() {
@@ -44,7 +46,13 @@ func (this *ArticleController) Add() {
 		tag := strings.TrimSpace(this.GetString("tag"))
 		status, _ := this.GetInt("status")
 
-		//sessionID := this.Ctx.GetCookie("auth")
+		SessionString := this.Ctx.GetCookie("auth")
+		AuthorInt := Separate(SessionString)
+		AuthorId, _ := strconv.ParseInt(AuthorInt, 10, 64)
+		var user models.User
+		user.Query().Filter("id", AuthorId).One(&user)
+		AuthName := user.UserName
+
 
 		var article models.Article
 		article.Title = title
@@ -54,14 +62,36 @@ func (this *ArticleController) Add() {
 		article.Status = status
 		article.ViewCount = 1
 		article.CreateTime = time.Now()
+		article.AuthorId = AuthorId
+		article.AuthorName = AuthName
 
+		if err := article.Insert(); err != nil {
+			this.ShowMsg(err.Error())
+		}
+		this.Redirect("/admin/article/list", 302)
 	}
 }
 
 // 编辑文章
 func (this *ArticleController) Edit() {
 	this.Layout = "admin/layout.html"
-	this.TplName = "admin/articlerdit.html"
+	this.TplName = "admin/articleedit.html"
+
+	id, _ := this.GetInt("id")
+	article := models.Article{Id: id}
+	if err := article.Read(); err != nil {
+		return
+	}
+	this.Data["article"] = article
+
+	// 获取分类
+	var list []*models.Category
+	var category models.Category
+	count, _ := category.Query().Count()
+	if count > 0 {
+		category.Query().All(&list)
+	}
+	this.Data["list"] = list
 }
 
 // 删除文章

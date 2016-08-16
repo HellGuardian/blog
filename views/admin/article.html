@@ -28,7 +28,15 @@
                 </dl>
             </td>
             <td>{{$v.Category}}</td>
-            <td>{{$v.Status}}</td>
+            {{if eq $v.Status 1}}
+            <td>所有人可见</td>
+            {{else if eq $v.Status 2}}
+            <td>仅主人可见</td>
+            {{else if eq $v.Status 3}}
+            <td>置顶</td>
+            {{else if eq $v.Status 0}}
+            <td>默认</td>
+            {{end}}
             <td>{{$v.Tag}}</td>
             <td>{{$v.AuthorName}}</td>
             <td>{{$v.ViewCount}}</td>
@@ -45,6 +53,7 @@
         </tbody>
     </table>
 </fieldset>
+
 
 <!-- 以下是弹出框  -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

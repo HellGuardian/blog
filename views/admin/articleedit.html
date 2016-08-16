@@ -1,17 +1,16 @@
 <fieldset>
-    <legend>添加文章</legend>
+    <legend>修改文章</legend>
     <form class="form-horizontal" method="post">
 
         <div class="form-group">
             <label>标题</label>
-            <input type="text" name="title" id="title" class="form-control input-sm" placeholder="文章标题" />
-            <span class="text-error">{{.errmsg.title}}</span>
+            <input type="text" name="title" id="title" class="form-control input-sm" placeholder="文章标题" value="{{.article.Title}}" />
         </div>
 
         <div class="form-group">
             <label class="form-control-static">分类</label>
             <div>
-                <select class="form-control">
+                <select class="form-control" id="category" name="category">
                     {{range $k, $v := .list}}
                     <option>{{$v.Title}}</option>
                     {{end}}
@@ -21,25 +20,32 @@
 
         <div class="form-group">
             <label>内容</label>
-            <textarea name="comment" id="comment" class="form-control" cols="30" rows="7"></textarea>
-            <span class="text-error">{{.errmsg.comment}}</span>
+            <textarea name="content" id="content" class="form-control" cols="30" rows="7">{{.article.Content}}</textarea>
         </div>
 
         <div class="form-group">
             <label class="control-label">标签:</label>
-            <input name="tag" id="tag" class="form-control input-sm" />
-            <span class="text-error">{{.errmsg.password1}}</span>
+            <p>
+                <input name="tag" id="tag" class="form-control input-sm"  value="{{.article.Tag}}"/>
+            </p>
+            <label>标签选择:</label>
+            <input type="checkbox" value="linux" name="linux" id="linux" onclick="checkTag(this, 'linux', 'linux')">&nbsp;linux
+            <input type="checkbox" value="java" name="java" id="java" onclick="checkTag(this, 'java', 'java')">&nbsp;java
+            <input type="checkbox" value="php" name="php" id="php" onclick="checkTag(this, 'php', 'php')">&nbsp;php
+            <input type="checkbox" value="git" name="git" id="git" onclick="checkTag(this, 'git', 'git')">&nbsp;git
+            <input type="checkbox" value="golang" name="golang" id="golang" onclick="checkTag(this, 'golang', 'golang')">&nbsp;golang
+            <input type="checkbox" value="nginx" name="nginx" id="nginx" onclick="checkTag(this, 'nginx', 'nginx')">&nbsp;nginx
         </div>
 
         <!-- 状态 -->
         <div class="form-group">
             <label>状态:</label>
             <div>
-                <input type="radio" name="active" value="1" id="data_active_1" checked />
+                <input type="radio" name="status" value="1" id="data_active_1" {{if eq .article.Status 1}} checked {{end}}/>
                 <label for="data_active_1" class="help-inline">所有人可见</label>&nbsp;&nbsp;
-                <input type="radio" name="active" value="2" id="data_active_2" />
+                <input type="radio" name="status" value="2" id="data_active_2" {{if eq .article.Status 2}} checked {{end}}/>
                 <label for="data_active_2" class="help-inline">仅主人可见</label>&nbsp;&nbsp;
-                <input type="radio" name="active" value="3" id="data_active_3" />
+                <input type="radio" name="status" value="3" id="data_active_3" {{if eq .article.Status 3}} checked {{end}}/>
                 <label for="data_active_3" class="help-inline">置顶</label>
             </div>
         </div>
@@ -50,10 +56,39 @@
                 <input type="hidden">
             </div>
             <div class="col-sm-3">
-                <button type="submit" class="btn btn-success" onclick="return checkInput();">保 存</button>&nbsp;&nbsp;
+                <button type="submit" class="btn btn-success" onclick="return checkInput();">提 交</button>&nbsp;&nbsp;
                 <a class="btn btn-default" type=button onclick="javascript:window.history.back();">返 回</a>
             </div>
         </div>
 
     </form>
 </fieldset>
+
+<script>
+    function checkInput() {
+        var title = document.getElementById("title")
+        if (title.value.length == 0) {
+            alert("标题不能为空,请输入标题。")
+        }
+
+        var comment = document.getElementById("comment")
+        if (comment.value.length == 0) {
+            alert("内容不能为空,请输入内容。")
+        }
+    }
+
+    function checkTag(e, itemName, thisValue){
+  var target = document.getElementById('tag');
+  var targetValue = target.value;
+  var inputs = document.getElementsByName(itemName);
+  if (e.checked == true) {
+    targetValue += thisValue + ';';
+  } else {
+    targetValue = targetValue.replace(thisValue + ';', '');
+  }
+  target.value = targetValue;
+  for(var i=0; i<inputs.length; i++){
+    inputs[i].checked = e.checked;
+  }
+}
+</script>
